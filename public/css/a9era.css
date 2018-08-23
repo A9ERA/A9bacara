@@ -1,0 +1,155 @@
+
+body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+}
+
+.aContent{
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+
+.aFlex{
+    display: flex;
+}
+
+/*                          >>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   aRow  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                            >>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<< 
+*/
+.aRow{
+    flex-direction: row;
+}.aRow.x1{
+    justify-content: flex-start;
+}.aRow.x2{
+    justify-content: center;
+}.aRow.x3{
+    justify-content: flex-end;
+}.aRow.y1{
+    align-items: flex-start;
+}.aRow.y2{
+    align-items: center;
+}.aRow.y3{
+    align-items: flex-end;
+}
+/*                                      {#   END OF aRow  #}
+*/
+
+
+/*                          >>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   aCol  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                            >>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<< 
+*/
+.aCol{
+    flex-direction: column;
+}.aCol.x1{
+    align-items: flex-start;
+}.aCol.x2{
+    align-items: center;
+}.aCol.x3{
+    align-items: flex-end;
+}.aCol.y1{
+    justify-content: flex-start;
+}.aCol.y2{
+    justify-content: center;
+}.aCol.y3{
+    justify-content: flex-end;
+}
+
+.aCol>.f-1,
+.aCol>.f-2,
+.aCol>.f-3,
+.aCol>.f-4,
+.aCol>.f-5,
+.aCol>.f-6,
+.aCol>.f-7,
+.aCol>.f-8,
+.aCol>.f-9,
+.aCol>.f-10,
+.aCol>.f-11,
+.aCol>.f-12,
+.aCol>.f-13,
+.aCol>.f-14,
+.aCol>.f-15{
+    width: 100%;
+}
+/*                                      {#   END OF aCol  #}
+*/
+
+
+
+/*
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   spa  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+.spa-M{
+    justify-content: space-around;
+}
+.spa-L{
+    align-content: space-around;
+}
+/*                                      {#   END OF spa  #}
+*/
+
+/*
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   spb  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+.spb-M{
+    justify-content: space-between;
+}
+.spb-L{
+    align-content: space-between;
+}
+/*                                      {#   END OF spb  #}
+*/
+
+/*
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   f-  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+.f-1{flex: 1;}
+.f-2{flex: 2;}
+.f-3{flex: 3;}
+.f-4{flex: 4;}
+.f-5{flex: 5;}
+.f-6{flex: 6;}
+.f-7{flex: 7;}
+.f-8{flex: 8;}
+.f-9{flex: 9;}
+.f-10{flex: 10;}
+.f-11{flex: 11;}
+.f-12{flex: 12;}
+.f-13{flex: 13;}
+.f-14{flex: 14;}
+.f-15{flex: 15;}
+/*                                      {#   END OF f-  #}
+*/
+
+/*
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   back  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+.back-yellow{background-color: #edc951;}
+.back-red{background-color: #cc2a36;}
+.back-blue{background-color: #00a0b0;}
+.back-green{background-color: #00b159;}
+/*                                      {#   END OF back  #}
+*/
+
+
+
+
+
+/*
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   aform  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+.aform{
+    height: 1.5vw;
+    width: 10vw;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+}.aform:focus{box-shadow: 0px 6px 4px 0px #00000061;}
+/*                                      {#   END OF aform  #}
+*/
