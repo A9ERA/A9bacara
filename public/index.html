@@ -14,13 +14,13 @@
     <script defer src="/__/firebase/5.4.0/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/a9era.css">
 
     <style>
       .panel{
-        flex-wrap: wrap;
         display: flex;
-        width: 60vw;
+        width: 50vw;
         min-height: 10vw;
         align-content: flex-start;
       }
@@ -43,6 +43,51 @@
         -o-user-select:none;
         user-select:none;
       }
+      .pbButton{
+        transition: 0.1s;
+        color: white;
+        font-size: 1.45vw;
+        font-family: sans-serif;
+        -webkit-user-select:none;
+        -khtml-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+      }
+
+      .pbButton:hover{
+        cursor: pointer;
+        font-size: 2.45vw;
+        text-shadow: 3px 2px 1px black;
+      }
+
+      .pbButton:active{
+        font-size: 1.45vw;
+        text-shadow: unset;
+      }
+
+      .dataInput{
+        background-color: #2f2f2f;
+        color: white;
+        width: 100%;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .result{
+        background-color:#2525259e;
+        color: #00b159;
+        font-size: 4.5vw;
+        font-family: sans-serif;
+        -webkit-user-select:none;
+        -khtml-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+      }
+
     </style>
   </head>
   <body>
@@ -53,26 +98,67 @@
 
           <!-- content -->
           <div class="aFlex aCol x2 f-5">
-              <!-- line1 -->
+              <!----------------------------------------------------------------------------- line1 -->
               <div class="aFlex aRow x2 f-1">
                 <!-- consolePanel -->
-                <div class="f-1" style="padding: 1vw;">
-                    <input type="text" class="aform" id="baData" onkeypress="return checkBP();" onkeyup="fetch6row()" style="width: 100%;text-transform:uppercase;">
+                <div class="aFlex aCol f-1">
+                    <!-- P/B Button -->
+                    <div class="aFlex aRow f-2">
+                      <div class="pbButton aRow aFlex x2 y2 back-blue f-1" onclick="PBadd('P')">P</div>
+                      <div class="pbButton aRow aFlex x2 y2 back-red f-1" onclick="PBadd('B')">B</div>
+                    </div>
+                    <!-- Input Data -->
+                    <input type="text" class="aform dataInput" id="baData" onkeypress="return checkBP();" onkeyup="fetch4row()" >
+                    <div class="f-1"></div>
                 </div>
                 <!-- panel -->
                 <div class="panel aCol">
-                    <div class="aFlex aRow" id="6Row_1"></div>
-                    <div class="aFlex aRow" id="6Row_2"></div>
-                    <div class="aFlex aRow" id="6Row_3"></div>
-                    <div class="aFlex aRow" id="6Row_4"></div>
-                    <div class="aFlex aRow" id="6Row_5"></div>
-                    <div class="aFlex aRow" id="6Row_6"></div> 
+                    <div class="aFlex aRow" id="4Row_1"></div>
+                    <div class="aFlex aRow" id="4Row_2"></div>
+                    <div class="aFlex aRow" id="4Row_3"></div>
+                    <div class="aFlex aRow" id="4Row_4"></div>
+                    <!-- <div class="aFlex aRow" id="6Row_5"></div>
+                    <div class="aFlex aRow" id="6Row_6"></div>  -->
+                </div>
+                <!-- result -->
+                <div class="aFlex aCol result f-1 x2 y2" id="4rowResult">
+                  Wait
                 </div>
               </div>
-              <!-- line2 -->
-              <div class="aFlex aCol x2 f-1"></div>
+              <!----------------------------------------------------------------------------- line2 -->
+              <div class="aFlex aRow x2 f-1">
+                <!-- consolePanel -->
+                <div class="aFlex aCol f-1"></div>
+                <!-- panel -->
+                <div class="panel aCol">
+                    <div class="aFlex aRow" id="dnaRow_1"></div>
+                    <div class="aFlex aRow" id="dnaRow_2"></div>
+                    <div class="aFlex aRow" id="dnaRow_3"></div>
+                    <div class="aFlex aRow" id="dnaRow_4"></div>
+                    <!-- <div class="aFlex aRow" id="dnaRow_5"></div>
+                    <div class="aFlex aRow" id="dnaRow_6"></div>  -->
+                </div>
+                <!-- result -->
+                <div class="aFlex aCol result f-1 x2 y2" id="dnaRowResult">
+                  Wait
+                </div>
+              </div>
               <!-- line3 -->
-              <div class="aFlex aCol x2 f-1"></div>
+              <div class="aFlex aCol x2 f-1">
+                <!-- consolePanel -->
+                <div class="aFlex aCol f-1"></div>
+                <!-- panel -->
+                <div class="panel aCol">
+                    <div class="aFlex aRow" id="advDnaRow_1"></div>
+                    <div class="aFlex aRow" id="advDnaRow_2"></div>
+                    <div class="aFlex aRow" id="advDnaRow_3"></div>
+                    <div class="aFlex aRow" id="advDnaRow_4"></div>
+                    <!-- <div class="aFlex aRow" id="advDnaRow_5"></div>
+                    <div class="aFlex aRow" id="advDnaRow_6"></div>  -->
+                </div>
+                <!-- result -->
+                <div class="aFlex aCol result f-1 x2 y2" id="advDnaRowResult">
+              </div>
               <!-- line4 -->
               <div class="aFlex aCol x2 f-1"></div>
 
@@ -88,36 +174,157 @@
           
       </div>
 
-      <!-- fetch6row -->
+      <!-- onButtonPBClick -->
       <script>
-        function fetch6row(){
+        function PBadd(val){
+          document.getElementById("baData").value += val;
+          fetch4row();
+        }
+      </script>
+
+      <!-- fetch4row -->
+      <script>
+        function fetch4row(){
           let baData = document.getElementById("baData").value;
           let baFet = baData.split("");
           let rowCount = 1;
           let colCount = 1;
-          let row = document.getElementById("6Row_"+rowCount);
+          let row = document.getElementById("4Row_"+rowCount);
 
-          for(i = 0;i<6;i++){
-            row = document.getElementById("6Row_"+rowCount);
+          for(i = 0;i<4;i++){
+            row = document.getElementById("4Row_"+rowCount);
             row.innerHTML = ""
             rowCount = rowCount + 1;
           }
 
           rowCount = 1;
           colCount = 1;
+          let curCol,curRow;
           for(i in baFet){
-            row = document.getElementById("6Row_"+rowCount);
+            row = document.getElementById("4Row_"+rowCount);
             if(baFet[i] == "B" || baFet[i] == "b"){
                 row.innerHTML += '<div class="bItem back-red" id="c'+colCount+'r'+rowCount+'">B</div>';
+                curCol = colCount
+                curRow = rowCount
                 rowCount += 1;
             }else if(baFet[i] == "P" || baFet[i] == "p"){
                 row.innerHTML += '<div class="bItem back-blue" id="c'+colCount+'r'+rowCount+'">P</div>';
+                curCol = colCount
+                curRow = rowCount
                 rowCount += 1;
             }
-            if(rowCount == 7){rowCount = 1;colCount += 1;}
+            if(rowCount == 5){rowCount = 1;colCount += 1;}
+          }
+          calResult4row(curCol,curRow);
+        }
+      </script>
+
+      <!-- calResult4row -->
+      <script>
+        /*------------------------------------------*/
+        /*-------------     ----    ----------------*/
+        /*------------      TEST     ---------------*/
+        /*------------      DATA     ---------------*/
+        /*---------------          -----------------*/
+        /*-----------------      -------------------*/
+        /*-------------------  ---------------------*/
+        /*------------------------------------------*/
+        /*
+        BPBPPBPPBBBPPBBPBBPPBBBPPBPB
+        */
+        function calResult4row(curCol,curRow){
+          
+          if(curCol > 1 || curRow == 4){
+            let nexRow;
+            if (curRow == 4){
+              calCur = curCol + 1;
+              nexRow = 1;
+            }else{
+              nexRow = curRow + 1;
+            }
+            document.getElementById("4rowResult").innerHTML = document.getElementById('c'+(calCur-1)+'r'+nexRow).innerHTML;
+            fetchXO(curCol,curRow);
+          }else{
+            document.getElementById("4rowResult").innerHTML = "Wait"
+          }
+
+        }
+      </script>
+      <!-- fetch X/O -->
+      <script>
+        function fetchXO(curCol,curRow){
+          let calLoop,rowCount=1;
+          
+          for(i = 0;i<4;i++){
+            row = document.getElementById("dnaRow_"+rowCount);
+            row.innerHTML = ""
+            rowCount = rowCount + 1;
+          }
+
+          if(curCol > 1){
+            if(curCol > 2){
+              calLoop = ((curCol - 2)*4) + curRow;
+            }else{
+              calLoop = curRow;
+            }
+            let fCol = 2;
+            let fRow = 1;
+            let dnaCurRow = 1, dnaCurCol = 1;
+            
+            for(i = 1;i <= calLoop; i++){
+              row = document.getElementById("dnaRow_"+dnaCurRow);
+              if(document.getElementById('c'+(fCol-1)+'r'+fRow).innerHTML == document.getElementById('c'+fCol+'r'+fRow).innerHTML){
+                row.innerHTML += '<div class="bItem back-green" id="dna_c'+dnaCurCol+'r'+dnaCurRow+'">S</div>';  //same
+              }else{
+                row.innerHTML += '<div class="bItem back-yellow" id="dna_c'+dnaCurCol+'r'+dnaCurRow+'">D</div>'; //different
+              }
+              curCol = dnaCurCol
+              curRow = dnaCurRow
+              fRow++;
+              dnaCurRow++;
+              if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
+            }
+            calResultXO(curCol,curRow);
+
           }
         }
       </script>
+
+      <!-- calResultX/O -->
+      <script>
+        function calResultXO(curCol,curRow){
+          if(curCol > 1 || curRow == 4){
+            let nexRow;
+            if (curRow == 4){
+              calCur = curCol + 1;
+              nexRow = 1;
+            }else{
+              calCur = curCol;
+              nexRow = curRow + 1;
+            }
+            r4Row = document.getElementById('c'+calCur+'r'+nexRow).innerHTML;
+            rXO = document.getElementById('dna_c'+(calCur-1)+'r'+nexRow).innerHTML;
+            let reXO='Wait';
+            if(rXO == 'S'){
+              if(r4Row == 'P'){
+                reXO = 'P'
+              }else if(r4Row == 'B'){
+                reXO = 'B'
+              }
+            }else if(rXO == 'D'){
+              if(r4Row == 'P'){
+                reXO = 'B'
+              }else if(r4Row == 'B'){
+                reXO = 'P'
+              }
+            }
+            document.getElementById("dnaRowResult").innerHTML = reXO;
+          }else{
+            document.getElementById("dnaRowResult").innerHTML = 'Wait';
+          }
+        }
+      </script>
+
       <!-- checkBP -->
       <script>
         function checkBP(){
@@ -130,6 +337,18 @@
         }
       </script>
 
+      <!-- balance -->
+      <script>
+        var myBalance = 3000; //THB
+        function setBalance(value){
+          myBalance = value;
+        }
+      </script>
+
+      <!-- kelly formula -->
+      <script>
+      
+      </script>
 
     </div>
   </body>
