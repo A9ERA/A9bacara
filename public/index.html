@@ -227,7 +227,7 @@
         }
       </script>
 
-      <!-- calResult4row -->
+      <!-- test DATA -->
       <script>
         /*------------------------------------------*/
         /*-------------     ----    ----------------*/
@@ -264,6 +264,10 @@
         -PPPBBBPBBPBBBBBBPBBPBPPBPPPBBPPBPPPBBBPBBBPBPPPBBBBBBBBBPBB-
         -PBBPBPPPPBPPBBPBPBPBBPPPBBPPPBPBPBPPBBPBBPBPBBPPPBPBBBBBPPPBBBBBBBPBBP-
         */
+      </script>
+
+      <!-- calResult4row -->
+      <script>
         function calResult4row(curCol,curRow){
           
           if(curCol > 1 || curRow == 4){
@@ -391,9 +395,35 @@
               dnaCurRow++;
               if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
             }
-            // cal-result ADV
+            calResultADV(curCol,curRow);
           }
         }
+      </script>
+
+      <!-- cal Result adv -->
+      <script>
+       function calResultADV(curCol,curRow){
+        if(curCol > 1 || curRow == 4){
+          let nexRow;
+          if (curRow == 4){
+            calCur = curCol + 1;
+            nexRow = 1;
+          }else{
+            calCur = curCol;
+            nexRow = curRow + 1;
+          }
+          r4Row = document.getElementById('c'+(calCur+1)+'r'+nexRow).innerHTML;
+          rXO = document.getElementById('dna_c'+calCur+'r'+nexRow).innerHTML;
+          rAdv = document.getElementById('advDna_c'+(calCur-1)+'r'+nexRow).innerHTML;
+          // console.log("r4Row: " + r4Row + " rXO: " + rXO + " rAdv: " + rAdv);
+          let reAdv='Wait';
+          if(rAdv == 'S'){
+
+          }else if(rAdv == 'D'){
+
+          }
+        }
+       }
       </script>
 
       <!-- checkBP -->
