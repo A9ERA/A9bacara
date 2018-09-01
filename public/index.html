@@ -24,6 +24,12 @@
         min-height: 10vw;
         align-content: flex-start;
       }
+
+      .line{
+        height: 25%;
+        width: 100%;
+      }
+
       .bItem{
         border-radius: 50%;
         width: 2vw;
@@ -88,6 +94,10 @@
         user-select:none;
       }
 
+      .contentt{
+        overflow: auto;
+      }
+
     </style>
   </head>
   <body>
@@ -97,9 +107,9 @@
       <div class="aFlex aRow f-1">
 
           <!-- content -->
-          <div class="aFlex aCol x2 f-5">
+          <div class="aFlex aCol x2 f-5 contentt">
               <!----------------------------------------------------------------------------- line1 -->
-              <div class="aFlex aRow x2 f-1">
+              <div class="aFlex aRow x2 line">
                 <!-- consolePanel -->
                 <div class="aFlex aCol f-1">
                     <!-- P/B Button -->
@@ -126,7 +136,7 @@
                 </div>
               </div>
               <!----------------------------------------------------------------------------- line2 -->
-              <div class="aFlex aRow x2 f-1">
+              <div class="aFlex aRow x2 line">
                 <!-- consolePanel -->
                 <div class="aFlex aCol f-1"></div>
                 <!-- panel -->
@@ -143,8 +153,8 @@
                   Wait
                 </div>
               </div>
-              <!-- line3 -->
-              <div class="aFlex aCol x2 f-1">
+              <!----------------------------------------------------------------------------- line3 -->
+              <div class="aFlex aRow x2 line">
                 <!-- consolePanel -->
                 <div class="aFlex aCol f-1"></div>
                 <!-- panel -->
@@ -153,14 +163,12 @@
                     <div class="aFlex aRow" id="advDnaRow_2"></div>
                     <div class="aFlex aRow" id="advDnaRow_3"></div>
                     <div class="aFlex aRow" id="advDnaRow_4"></div>
-                    <!-- <div class="aFlex aRow" id="advDnaRow_5"></div>
-                    <div class="aFlex aRow" id="advDnaRow_6"></div>  -->
                 </div>
                 <!-- result -->
-                <div class="aFlex aCol result f-1 x2 y2" id="advDnaRowResult">
+                <div class="aFlex aCol result f-1 x2 y2" id="advDnaRowResult"></div>
               </div>
-              <!-- line4 -->
-              <div class="aFlex aCol x2 f-1"></div>
+              <!----------------------------------------------------------------------------- line4 -->
+              <div class="aFlex aCol x2 line"></div>
 
           </div>
 
@@ -230,7 +238,31 @@
         /*-------------------  ---------------------*/
         /*------------------------------------------*/
         /*
-        BPBPPBPPBBBPPBBPBBPPBBBPPBPB
+        -BPPBBBBPPPPPBBBBBPBBBBPPPPBBBBBPPBPBBBBBBBBPBPPPPBBBBPBBPBBBBPBBPBBPBPBP-
+        -PPPPPBBBBPPPPPBPBBBBPBBBPBPPPBBBPBBPBBBPPPPBBPBBPPBPPPPPBBPBBPBPBBBPPPPPPPB-
+        -BBBBPBBBPPBBBBBPBPPPBBBBBPBBPBBBPBBPBBBBBPPBBBPBBBPBBPBBBPBPBPPPPPPBBBBB-
+        -PBBBBPBPBBPBBBBBPPPBBBPPPPBPBPBPPBBPBBBBBPPPBPBBBBBPPPBBBBBPPBBPPBBBBBPPP-
+        -PPPPPPBBPPBPBPPBBPBBBBBPPBBPPPBPBPPBPBPBBPPPBBPBBBBPBPPPPBPPBBBBBBBB -
+        -PBBBPBPBPPPPBBBBBPPBBBBBBPBBPPBBBPBPPPBBPBPBBPBBBBPPPBBPPBPPBBBBBBBP-
+        -BPPBBBPBBBBPBBBBPBPBPBBBPPBBBPBPPPPPPBBBPBPPPBBBPPBBPBBPPBBPPBPPBPPBBBBPPBB-
+        -BBBBPPPBPPPPPPPPPBBBBPPBPPBBBBBPPBBPPPPBBBBPPPBPBPBPBBBPBPBBBPBBPBBBPBBBB-
+        -PPBPPBPPBBPPPPPPPPPPBPBPBBPPBPPPBPBBBBBBBPPBPPPBPPPBPPBBPPPBPPPBBBBBPBBPBBBBB-
+        -PPBPPBBPPBBPPPPBBBPPPPPPBPBBBBPBBBBPPPBPPPBPPBPPPPPBPPBPBBBBBBPBBPBB-
+        -PBBBBBBBPPPPBPBPPBPPPBBPPBBBPPBBPPBBBPBBBBBBPPBPPPPBBPBBBPPBPBBPBPBPP-
+        -PBPPBPPPPBPBBPPPBBPPBBPPPPPPBPPBBPBPPPBPPPPPBBPBBBPPBBPPBBPPPBBPBBBBBPB -
+        -BPPPPPBPBPPBPBBBPBPBBBPPBPPBBBBBPBBPPPBPBPPPBPPPPBPPBPBBBBBPBPPBPPBBBP-
+        -BBPBPPBBBBBPPBBBBBPBPBPBBBBPPPPBBBBPBPBPPPBBBPPBPPPPBBBPBBBPBPBBBBPPPPPPBBB-
+        -BBBPPBPPPBPBPPBBPPBPBPPPBPPBPBPPBPBBBBPPBBBPBBBBBPPBPBPBBPBBPBBBBBBPBPPBBBPB-
+        -PPPBBBBPBBBBBPPPBPPPBBBPPBBBPPPBPPBBPPPBPPPPPPPPBPPPBPBBPBPPPBBBBBBPBBBBBB -
+        -BPBBPPPPPBBBBPBPBBPPBPBBBPBPPBPPPBPBBPPPBBBPBBBBPBBBBPBPPPPBBPPPPBPPPBB -
+        -PPBPPPPBPBBPBBBBPBBBPPPBBBPBPBBBBPPPBBPPBBPBPBBBPBPBPBBBPPBBP-
+        -PPPPBBPBBPPBBBPBBBBBBBPBPPBBPBBPBPBPPBBBBPPBPPPPPPPBPPBBPPPPBBBBPBP-
+        -BPBBBPBBPPPBBBBBPPBBPPBPPBBBPBPBPPBPPBBBBPBBPPPBPPPPBPPBBPPBBBBBPPBPB -
+        -BPPPBPPBPPPBPBBBBBPBBBPBBBBBBBPBPPPPBBPPPPBBBPBPPBPPPBBPBBBBBPPBBPPBB-
+        -PBBBPBPPPBBBPPBPBBPBPPPPPPPBBBPBBBBBPPPPBBPBBBBPPPBPPBPBBPPBPBBBPPBBPBBPPBPBP-
+        -BPBPBPBPBBBBBBBPBBPPPBPBBBPPPPBPPBPPPPPPPBBPBPBPBPPBBPPBBBBPPBBPBBBBPBB-
+        -PPPBBBPBBPBBBBBBPBBPBPPBPPPBBPPBPPPBBBPBBBPBPPPBBBBBBBBBPBB-
+        -PBBPBPPPPBPPBBPBPBPBBPPPBBPPPBPBPBPPBBPBBPBPBBPPPBPBBBBBPPPBBBBBBBPBBP-
         */
         function calResult4row(curCol,curRow){
           
@@ -250,6 +282,7 @@
 
         }
       </script>
+
       <!-- fetch X/O -->
       <script>
         function fetchXO(curCol,curRow){
@@ -285,7 +318,6 @@
               if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
             }
             calResultXO(curCol,curRow);
-
           }
         }
       </script>
@@ -319,8 +351,47 @@
               }
             }
             document.getElementById("dnaRowResult").innerHTML = reXO;
+            fetchADV(curCol,curRow);
           }else{
             document.getElementById("dnaRowResult").innerHTML = 'Wait';
+          }
+        }
+      </script>
+
+      <!-- fetch adv -->
+      <script>
+        function fetchADV(curCol,curRow){
+          let calLoop,rowCount=1;
+          
+          for(i = 0;i<4;i++){
+            row = document.getElementById("advDnaRow_"+rowCount);
+            row.innerHTML = ""
+            rowCount = rowCount + 1;
+          }
+
+          if(curCol > 1){
+            if(curCol > 2){
+              calLoop = ((curCol - 2)*4) + curRow;
+            }else{
+              calLoop = curRow;
+            }
+            let fCol = 2;
+            let fRow = 1;
+            let dnaCurRow = 1, dnaCurCol = 1;
+            for(i = 1;i <= calLoop; i++){
+              row = document.getElementById("advDnaRow_"+dnaCurRow);
+              if(document.getElementById('dna_c'+(fCol-1)+'r'+fRow).innerHTML == document.getElementById('dna_c'+fCol+'r'+fRow).innerHTML){
+                row.innerHTML += '<div class="bItem back-green" id="advDna_c'+dnaCurCol+'r'+dnaCurRow+'">S</div>';  //same
+              }else{
+                row.innerHTML += '<div class="bItem back-yellow" id="advDna_c'+dnaCurCol+'r'+dnaCurRow+'">D</div>'; //different
+              }
+              curCol = dnaCurCol
+              curRow = dnaCurRow
+              fRow++;
+              dnaCurRow++;
+              if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
+            }
+            // cal-result ADV
           }
         }
       </script>
