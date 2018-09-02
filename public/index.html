@@ -18,17 +18,11 @@
     <link rel="stylesheet" href="./css/a9era.css">
 
     <style>
-      .panel{
-        display: flex;
-        width: 50vw;
-        min-height: 10vw;
-        align-content: flex-start;
-      }
+      .panel{ display: flex; width: 50vw; min-height: 10vw; align-content: flex-start; }
+      
+      .panelDetail{ width: 50vw; }
 
-      .line{
-        height: 25%;
-        width: 100%;
-      }
+      .line{ height: 25%; width: 100%; }
 
       .bItem{
         border-radius: 50%;
@@ -62,16 +56,9 @@
         user-select:none;
       }
 
-      .pbButton:hover{
-        cursor: pointer;
-        font-size: 2.45vw;
-        text-shadow: 3px 2px 1px black;
-      }
+      .pbButton:hover{ cursor: pointer; font-size: 2.45vw; text-shadow: 3px 2px 1px black; }
 
-      .pbButton:active{
-        font-size: 1.45vw;
-        text-shadow: unset;
-      }
+      .pbButton:active{ font-size: 1.45vw; text-shadow: unset; }
 
       .dataInput{
         background-color: #2f2f2f;
@@ -82,10 +69,10 @@
       }
 
       .result{
-        background-color:#2525259e;
         color: #00b159;
         font-size: 4.5vw;
         font-family: sans-serif;
+        transition: 0.15s;
         -webkit-user-select:none;
         -khtml-user-select:none;
         -moz-user-select:none;
@@ -94,9 +81,19 @@
         user-select:none;
       }
 
-      .contentt{
-        overflow: auto;
+      .result:hover{
+        font-size: 5.5vw;
       }
+
+      .resultDetail{
+
+      }
+
+      .contentt{ overflow: auto; }
+
+      .pbButtonPanel{ height: 12%; width: 100%; }
+      
+      .details{ height: 1%; width: 100%; }
 
     </style>
   </head>
@@ -107,56 +104,41 @@
       <div class="aFlex aRow f-1">
 
           <!-- content -->
-          <div class="aFlex aCol x2 f-5 contentt">
+          <div class="aCol x2 f-5 contentt">
               <!----------------------------------------------------------------------------- line1 -->
               <div class="aFlex aRow x2 line">
-                <!-- consolePanel -->
-                <div class="aFlex aCol f-1">
-                    <!-- P/B Button -->
-                    <div class="aFlex aRow f-2">
-                      <div class="pbButton aRow aFlex x2 y2 back-blue f-1" onclick="PBadd('P')">P</div>
-                      <div class="pbButton aRow aFlex x2 y2 back-red f-1" onclick="PBadd('B')">B</div>
-                    </div>
-                    <!-- Input Data -->
-                    <input type="text" class="aform dataInput" id="baData" onkeypress="return checkBP();" onkeyup="fetch4row()" >
-                    <div class="f-1"></div>
-                </div>
                 <!-- panel -->
                 <div class="panel aCol">
                     <div class="aFlex aRow" id="4Row_1"></div>
                     <div class="aFlex aRow" id="4Row_2"></div>
                     <div class="aFlex aRow" id="4Row_3"></div>
                     <div class="aFlex aRow" id="4Row_4"></div>
-                    <!-- <div class="aFlex aRow" id="6Row_5"></div>
-                    <div class="aFlex aRow" id="6Row_6"></div>  -->
                 </div>
+                <!-- consolePanel -->
+                <div class="aFlex aCol f-1"></div>
                 <!-- result -->
-                <div class="aFlex aCol result f-1 x2 y2" id="4rowResult">
+                <div class="aFlex aCol result f-1 x2 y2 back-black" id="4rowResult">
                   Wait
                 </div>
               </div>
               <!----------------------------------------------------------------------------- line2 -->
               <div class="aFlex aRow x2 line">
-                <!-- consolePanel -->
-                <div class="aFlex aCol f-1"></div>
                 <!-- panel -->
                 <div class="panel aCol">
                     <div class="aFlex aRow" id="dnaRow_1"></div>
                     <div class="aFlex aRow" id="dnaRow_2"></div>
                     <div class="aFlex aRow" id="dnaRow_3"></div>
                     <div class="aFlex aRow" id="dnaRow_4"></div>
-                    <!-- <div class="aFlex aRow" id="dnaRow_5"></div>
-                    <div class="aFlex aRow" id="dnaRow_6"></div>  -->
                 </div>
+                <!-- consolePanel -->
+                <div class="aFlex aCol f-1"></div>
                 <!-- result -->
-                <div class="aFlex aCol result f-1 x2 y2" id="dnaRowResult">
+                <div class="aFlex aCol result f-1 x2 y2 back-black" id="dnaRowResult">
                   Wait
                 </div>
               </div>
               <!----------------------------------------------------------------------------- line3 -->
               <div class="aFlex aRow x2 line">
-                <!-- consolePanel -->
-                <div class="aFlex aCol f-1"></div>
                 <!-- panel -->
                 <div class="panel aCol">
                     <div class="aFlex aRow" id="advDnaRow_1"></div>
@@ -164,16 +146,44 @@
                     <div class="aFlex aRow" id="advDnaRow_3"></div>
                     <div class="aFlex aRow" id="advDnaRow_4"></div>
                 </div>
+                <!-- consolePanel -->
+                <div class="aFlex aCol f-1"></div>
                 <!-- result -->
-                <div class="aFlex aCol result f-1 x2 y2" id="advDnaRowResult"></div>
+                <div class="aFlex aCol result f-1 x2 y2 back-black" id="advDnaRowResult">
+                  Wait
+                </div>
               </div>
               <!----------------------------------------------------------------------------- line4 -->
-              <div class="aFlex aCol x2 line"></div>
+              <div class="details aFlex aRow">
+                  <div class="panelDetail"></div>
+                  <div class="aFlex aCol result f-1 x2 y2 back-green" id="L4rowSame"></div>
+                  <div class="aFlex aCol result f-1 x2 y2 back-yellow" id="L4rowSame"></div>
+              </div>
+              <div class="aFlex aRow x2 line">
+                <!-- panel -->
+                <div class="panel aCol">
+                    <div class="aFlex aRow" id="L4row_1"></div>
+                    <div class="aFlex aRow" id="L4row_2"></div>
+                    <div class="aFlex aRow" id="L4row_3"></div>
+                    <div class="aFlex aRow" id="L4row_4"></div>
+                </div>
+                <!-- result -->
+                <div class="aFlex aCol result f-1 x2 y2 back-black" id="L4rowSame">Wait</div>
+                <div class="aFlex aCol result f-1 x2 y2 back-black" id="L4rowDiff">Wait</div>
+              </div>
+              
 
           </div>
 
           <!-- Nav -->
           <div class="aFlex aCol x2 back-green f-1">
+              <!-- P/B Button -->
+              <div class="aFlex aRow pbButtonPanel">
+                <div class="pbButton aRow aFlex x2 y2 back-blue f-1" onclick="PBadd('P')">P</div>
+                <div class="pbButton aRow aFlex x2 y2 back-red f-1" onclick="PBadd('B')">B</div>
+              </div>
+              <!-- Input Data -->
+              <input type="text" class="aform dataInput" id="baData" onkeypress="return checkBP();" onkeyup="fetch4row()" >
               <br>
               <input type="text" class="aform" id="">
               <br>
@@ -237,17 +247,17 @@
         /*-----------------      -------------------*/
         /*-------------------  ---------------------*/
         /*------------------------------------------*/
-        /*
-        -BPPBBBBPPPPPBBBBBPBBBBPPPPBBBBBPPBPBBBBBBBBPBPPPPBBBBPBBPBBBBPBBPBBPBPBP-
-        -PPPPPBBBBPPPPPBPBBBBPBBBPBPPPBBBPBBPBBBPPPPBBPBBPPBPPPPPBBPBBPBPBBBPPPPPPPB-
-        -BBBBPBBBPPBBBBBPBPPPBBBBBPBBPBBBPBBPBBBBBPPBBBPBBBPBBPBBBPBPBPPPPPPBBBBB-
-        -PBBBBPBPBBPBBBBBPPPBBBPPPPBPBPBPPBBPBBBBBPPPBPBBBBBPPPBBBBBPPBBPPBBBBBPPP-
-        -PPPPPPBBPPBPBPPBBPBBBBBPPBBPPPBPBPPBPBPBBPPPBBPBBBBPBPPPPBPPBBBBBBBB -
-        -PBBBPBPBPPPPBBBBBPPBBBBBBPBBPPBBBPBPPPBBPBPBBPBBBBPPPBBPPBPPBBBBBBBP-
-        -BPPBBBPBBBBPBBBBPBPBPBBBPPBBBPBPPPPPPBBBPBPPPBBBPPBBPBBPPBBPPBPPBPPBBBBPPBB-
-        -BBBBPPPBPPPPPPPPPBBBBPPBPPBBBBBPPBBPPPPBBBBPPPBPBPBPBBBPBPBBBPBBPBBBPBBBB-
-        -PPBPPBPPBBPPPPPPPPPPBPBPBBPPBPPPBPBBBBBBBPPBPPPBPPPBPPBBPPPBPPPBBBBBPBBPBBBBB-
-        -PPBPPBBPPBBPPPPBBBPPPPPPBPBBBBPBBBBPPPBPPPBPPBPPPPPBPPBPBBBBBBPBBPBB-
+        /*                                                                                r4      XO
+        -BPPBBBBPPPPPBBBBBPBBBBPPPPBBBBBPPBPBBBBBBBBPBPPPPBBBBPBBPBBBBPBBPBBPBPBP-        9       4
+        -PPPPPBBBBPPPPPBPBBBBPBBBPBPPPBBBPBBPBBBPPPPBBPBBPPBPPPPPBBPBBPBPBBBPPPPPPPB-     8       7
+        -BBBBPBBBPPBBBBBPBPPPBBBBBPBBPBBBPBBPBBBBBPPBBBPBBBPBBPBBBPBPBPPPPPPBBBBB-        4       4
+        -PBBBBPBPBBPBBBBBPPPBBBPPPPBPBPBPPBBPBBBBBPPPBPBBBBBPPPBBBBBPPBBPPBBBBBPPP-       3       3
+        -PPPPPPBBPPBPBPPBBPBBBBBPPBBPPPBPBPPBPBPBBPPPBBPBBBBPBPPPPBPPBBBBBBBB -           4       5
+        -PBBBPBPBPPPPBBBBBPPBBBBBBPBBPPBBBPBPPPBBPBPBBPBBBBPPPBBPPBPPBBBBBBBP-            5       5
+        -BPPBBBPBBBBPBBBBPBPBPBBBPPBBBPBPPPPPPBBBPBPPPBBBPPBBPBBPPBBPPBPPBPPBBBBPPBB-     4       5
+        -BBBBPPPBPPPPPPPPPBBBBPPBPPBBBBBPPBBPPPPBBBBPPPBPBPBPBBBPBPBBBPBBPBBBPBBBB-       6       4
+        -PPBPPBPPBBPPPPPPPPPPBPBPBBPPBPPPBPBBBBBBBPPBPPPBPPPBPPBBPPPBPPPBBBBBPBBPBBBBB-   3       3
+        -PPBPPBBPPBBPPPPBBBPPPPPPBPBBBBPBBBBPPPBPPPBPPBPPPPPBPPBPBBBBBBPBBPBB-            5       6
         -PBBBBBBBPPPPBPBPPBPPPBBPPBBBPPBBPPBBBPBBBBBBPPBPPPPBBPBBBPPBPBBPBPBPP-
         -PBPPBPPPPBPBBPPPBBPPBBPPPPPPBPPBBPBPPPBPPPPPBBPBBBPPBBPPBBPPPBBPBBBBBPB -
         -BPPPPPBPBPPBPBBBPBPBBBPPBPPBBBBBPBBPPPBPBPPPBPPPPBPPBPBBBBBPBPPBPPBBBP-
@@ -418,12 +428,78 @@
           // console.log("r4Row: " + r4Row + " rXO: " + rXO + " rAdv: " + rAdv);
           let reAdv='Wait';
           if(rAdv == 'S'){
-
+            if(rXO == 'S'){
+              if(r4Row == 'P'){
+                reAdv = 'P'
+              }else if(r4Row == 'B'){
+                reAdv = 'B'
+              }
+            }else if(rXO == 'D'){
+              if(r4Row == 'P'){
+                reAdv = 'B'
+              }else if(r4Row == 'B'){
+                reAdv = 'P'
+              }
+            }
           }else if(rAdv == 'D'){
-
+            if(rXO == 'S'){
+              if(r4Row == 'P'){
+                reAdv = 'B'
+              }else if(r4Row == 'B'){
+                reAdv = 'P'
+              }
+            }else if(rXO == 'D'){
+              if(r4Row == 'P'){
+                reAdv = 'P'
+              }else if(r4Row == 'B'){
+                reAdv = 'B'
+              }
+            }
           }
+          document.getElementById("advDnaRowResult").innerHTML = reAdv;
+          fetchL4(curCol,curRow)
+        }else{
+          document.getElementById("advDnaRowResult").innerHTML = 'Wait';
         }
        }
+      </script>
+
+      <!-- fetch L4 -->
+      <script>
+        function fetchL4(curCol,curRow){
+          let calLoop,rowCount=1;
+          
+          for(i = 0;i<4;i++){
+            row = document.getElementById("L4row_"+rowCount);
+            row.innerHTML = ""
+            rowCount = rowCount + 1;
+          }
+
+          if(curCol > 1){
+            if(curCol > 2){
+              calLoop = ((curCol - 2)*4) + curRow;
+            }else{
+              calLoop = curRow;
+            }
+            let fCol = 2;
+            let fRow = 1;
+            let dnaCurRow = 1, dnaCurCol = 1;
+            for(i = 1;i <= calLoop; i++){
+              row = document.getElementById("L4row_"+dnaCurRow);
+              if(document.getElementById('advDna_c'+(fCol-1)+'r'+fRow).innerHTML == document.getElementById('advDna_c'+fCol+'r'+fRow).innerHTML){
+                row.innerHTML += '<div class="bItem back-green" id="L4_c'+dnaCurCol+'r'+dnaCurRow+'">S</div>';  //same
+              }else{
+                row.innerHTML += '<div class="bItem back-yellow" id="L4_c'+dnaCurCol+'r'+dnaCurRow+'">D</div>'; //different
+              }
+              curCol = dnaCurCol
+              curRow = dnaCurRow
+              fRow++;
+              dnaCurRow++;
+              if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
+            }
+          }
+
+        }
       </script>
 
       <!-- checkBP -->

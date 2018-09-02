@@ -1,5 +1,6 @@
 
 body{
+    font-family: sans-serif;
     margin: 0;
     height: 100%;
     width: 100%;
@@ -130,6 +131,7 @@ body{
 /*
     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   back  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 */
+.back-black{background-color:#2525259e;}
 .back-yellow{background-color: #edc951;}
 .back-red{background-color: #cc2a36;}
 .back-blue{background-color: #00a0b0;}
