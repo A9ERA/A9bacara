@@ -14,8 +14,9 @@
     <script defer src="/__/firebase/5.4.0/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-    <script src="/js/jquery.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/a9era.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
       .panel{ display: flex; width: 50vw; min-height: 10vw; align-content: flex-start; }
@@ -95,9 +96,55 @@
       
       .details{ height: 1%; width: 100%; }
 
+      .balanceSec{
+        height: 5%;
+        width: 100%;
+        font-size: 15pt;
+        font-weight: bold;
+        color: #00b159;
+      }
+
+      .addBalanceButton{
+        margin-left: 10px;
+        color: white;
+        height: 100%;
+        width: 3vw;
+        transition: 0.15s;
+        opacity: 0.9;
+      }
+
+      .addBalanceButton:hover{
+        cursor: pointer;
+        opacity: 1;
+      }
+
+      .addBalanceButton:active{
+        opacity: 0.9;
+      }
+
     </style>
   </head>
   <body>
+
+    <!-- Modal -->
+    <div class="fadeBlack">
+      <div class="aModalPanel_S">
+        <div class="aModalConsoleSec">
+          <div class="aModal_Close">
+            <i class="material-icons aModal_Close" style="font-size:25px" id="Mclose">clear</i></div>
+          </div>
+          <div>Set Balance</div>
+      </div>
+    </div>
+
+    <!-- Modal Script -->
+    <script>
+
+      $( "#Mclose" ).click(function() {
+        alert( "Handler for .click() called." );
+      });
+    </script>
+
     <!-- TOP PARENT  -->
     <div class="aContent" style="background-color: rgb(32, 32, 49);">
       <!-- body -->
@@ -156,8 +203,8 @@
               <!----------------------------------------------------------------------------- line4 -->
               <div class="details aFlex aRow">
                   <div class="panelDetail"></div>
-                  <div class="aFlex aCol result f-1 x2 y2 back-green" id="L4rowSame"></div>
-                  <div class="aFlex aCol result f-1 x2 y2 back-yellow" id="L4rowSame"></div>
+                  <div class="aFlex aCol result f-1 x2 y2 back-green"></div>
+                  <div class="aFlex aCol result f-1 x2 y2 back-yellow"></div>
               </div>
               <div class="aFlex aRow x2 line">
                 <!-- panel -->
@@ -177,6 +224,11 @@
 
           <!-- Nav -->
           <div class="aFlex aCol x2 back-green f-1">
+              <!-- Balance -->
+              <div class="aFlex aRow balanceSec y2 x3 back-black">
+                <div>0 $ </div>
+                <div class="addBalanceButton aFlex aCol back-green x2 y2"><i class="material-icons" style="font-size:30px">add</i></div>
+              </div>
               <!-- P/B Button -->
               <div class="aFlex aRow pbButtonPanel">
                 <div class="pbButton aRow aFlex x2 y2 back-blue f-1" onclick="PBadd('P')">P</div>
@@ -185,9 +237,9 @@
               <!-- Input Data -->
               <input type="text" class="aform dataInput" id="baData" onkeypress="return checkBP();" onkeyup="fetch4row()" >
               <br>
-              <input type="text" class="aform" id="">
+              <input type="text" class="aform">
               <br>
-              <input type="text" class="aform" id="">
+              <input type="text" class="aform">
           </div>
           
       </div>
@@ -497,10 +549,118 @@
               dnaCurRow++;
               if(fRow == 5){fRow=1;fCol++;dnaCurRow=1;dnaCurCol++;}
             }
+            calResultL4(curCol,curRow);
           }
 
         }
       </script>
+
+      <!-- cal Result L4 -->
+      <script>
+        function calResultL4(curCol,curRow){
+          if(curCol > 1 || curRow == 4){
+            let nexRow;
+            if (curRow == 4){
+              calCur = curCol + 1;
+              nexRow = 1;
+            }else{
+              calCur = curCol;
+              nexRow = curRow + 1;
+            }
+            r4Row = document.getElementById('c'+(calCur+2)+'r'+nexRow).innerHTML;
+            rXO = document.getElementById('dna_c'+(calCur+1)+'r'+nexRow).innerHTML;
+            rAdv = document.getElementById('advDna_c'+calCur+'r'+nexRow).innerHTML;
+            rL4 = document.getElementById('L4_c'+(calCur-1)+'r'+nexRow).innerHTML;
+            console.log("r4Row: " + r4Row + " rXO: " + rXO + " rAdv: " + rAdv+ " rL4: " + rL4);
+            let reL4_S='Wait';
+            let reL4_D='Wait';
+            if(rL4 == 'S'){
+                if(rAdv == 'S'){
+                    if(rXO == 'S'){
+                        if(r4Row == 'P'){
+                            reL4_S='P';
+                            reL4_D='B';
+                        }else if(r4Row == 'B'){
+                            reL4_S='B';
+                            reL4_D='P';
+                        }
+                    }else if(rXO == 'D'){
+                        if(r4Row == 'P'){
+                            reL4_S='B';
+                            reL4_D='P';                            
+                        }else if(r4Row == 'B'){
+                            reL4_S='P';
+                            reL4_D='B';
+                        }
+                    }
+                }else if(rAdv == 'D'){
+                    if(rXO == 'S'){
+                        if(r4Row == 'P'){
+                            reL4_S='B';
+                            reL4_D='P';
+                        }else if(r4Row == 'B'){
+                            reL4_S='P';
+                            reL4_D='B';
+                        }
+                    }else if(rXO == 'D'){
+                        if(r4Row == 'P'){
+                            reL4_S='P';
+                            reL4_D='B';
+                        }else if(r4Row == 'B'){
+                            reL4_S='B';
+                            reL4_D='P';
+                        }
+                    }
+                }
+            }else if(rL4 == 'D'){
+                if(rAdv == 'S'){
+                    if(rXO == 'S'){
+                        if(r4Row == 'P'){
+                            reL4_S='P';
+                            reL4_D='B';                            
+                        }else if(r4Row == 'B'){
+                            reL4_S='B';
+                            reL4_D='P';
+                        }
+                    }else if(rXO == 'D'){
+                        if(r4Row == 'P'){
+                            reL4_S='B';
+                            reL4_D='P';
+                        }else if(r4Row == 'B'){
+                            reL4_S='P';
+                            reL4_D='B';
+                        }
+                    }
+                }else if(rAdv == 'D'){
+                  if(rXO == 'S'){
+                      if(r4Row == 'P'){
+                          reL4_S='B';
+                          reL4_D='P';                          
+                      }else if(r4Row == 'B'){
+                          reL4_S='P';
+                          reL4_D='B';
+                      }
+                  }else if(rXO == 'D'){
+                      if(r4Row == 'P'){
+                          reL4_S='P';
+                          reL4_D='B';                        
+                      }else if(r4Row == 'B'){
+                          reL4_S='B';
+                          reL4_D='P';
+                      }
+                  }
+              }
+            }
+            console.log(reL4_S+":"+reL4_D)
+            document.getElementById("L4rowSame").innerHTML = reL4_S;
+            document.getElementById("L4rowDiff").innerHTML = reL4_D;
+          }else{
+            document.getElementById("L4rowSame").innerHTML = 'Wait';
+            document.getElementById("L4rowDiff").innerHTML = 'Wait';
+          }
+        }
+      </script>
+
 
       <!-- checkBP -->
       <script>
@@ -516,15 +676,54 @@
 
       <!-- balance -->
       <script>
-        var myBalance = 3000; //THB
+        var myBalance = 0; //THB
+        var undoList = [];
+        
+        function getBalance(){
+          return myBalance;
+        }
+
         function setBalance(value){
           myBalance = value;
+          undoList.append(value);
         }
+
+        function setWin(value){
+          w = value;
+          myBalance = myBalance + value;
+          undoList.append(value);
+        }
+
+        function setLose(value){
+          l = value;
+          myBalance = myBalance - value;
+          undoList.append(value);
+        }
+
+        function unDo(){
+          undoList.pop();
+          let last = undoList.pop();
+          setBalance(last);
+        }
+
       </script>
 
       <!-- kelly formula -->
       <script>
-      
+        // Default 1% of Balance
+        var per = 1;
+
+        function kellyWIN(){
+          let curBalance = getBalance();
+          let Win =  curBalance * (per/100);
+          setWin(Win);
+        }
+
+        function kellyLose(){
+          let curBalance = getBalance();
+          let Win =  curBalance * (per/100);
+          setWin(Win);
+        }
       </script>
 
     </div>
