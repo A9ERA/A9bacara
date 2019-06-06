@@ -122,27 +122,95 @@
         opacity: 0.9;
       }
 
+      .inmodalText{
+        display: flex;
+        width: 70%;
+        color: #03d414;
+        justify-content: flex-end;
+        font-weight: bold;
+        font-size: 6vw;
+      }
+
+      .setbuttonBalance{
+        height: 2vw;
+        width: 5vw;
+        transition: 0.2s;
+        background-color: limegreen;
+        margin-top: 1vw;
+      }
+
+      .setbuttonBalance:hover{
+        background-color: #249e24;
+        cursor: pointer;
+      }
+
+      .simuLink_btn{
+        width: 100%;
+        height: 2vw;
+        padding-right: 10%;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+        user-select: none;
+      }
+      .simuLink_btn:hover{
+        height: 3vw;
+      }
+
     </style>
   </head>
   <body>
 
     <!-- Modal -->
-    <div class="fadeBlack">
+    <div class="fadeBlack" id="myModal">
       <div class="aModalPanel_S">
         <div class="aModalConsoleSec">
           <div class="aModal_Close">
-            <i class="material-icons aModal_Close" style="font-size:25px" id="Mclose">clear</i></div>
+            <i class="material-icons aModal_Close" style="font-size:25px" id="Mclose">clear</i>
           </div>
-          <div>Set Balance</div>
+        </div>
+        
+        <div class="aFlex aRow">
+          <div class="aFlex aCol">
+            <div>Set Balance</div>
+            <input type="number" class="aform" id="inputBaNum">
+            <div class="setbuttonBalance aFlex aRow x2 y2" onclick="setB($('#inputBaNum').val())">SET</div>
+          </div>
+          <div class="inmodalText">
+            <div id="balanceNum" style="transition: 1s;">0</div>
+            <div style="margin-left: 1vw;">$</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Modal Script -->
     <script>
+      $("#myModal").hide(0);
+      // open
+      function openModal(){
+        $("#myModal").show(0);
+        $("#myModal").animate({opacity: '1'},300);
+      }
+
+      // close
+      function closeModal(){
+        $("#myModal").animate({opacity: '0'},300).delay(300).hide(0);
+      }
 
       $( "#Mclose" ).click(function() {
-        alert( "Handler for .click() called." );
+        $("#myModal").animate({opacity: '0'},300).delay(300).hide(0);
       });
+
+      $("#inputBaNum").on('keyup change',function(){
+        $("#balanceNum").html($("#inputBaNum").val());
+      });
+
+      // setbalance
+      function setB(value){
+        setBalance(value);
+        closeModal();
+      }
     </script>
 
     <!-- TOP PARENT  -->
@@ -224,10 +292,14 @@
 
           <!-- Nav -->
           <div class="aFlex aCol x2 back-green f-1">
+              <!-- simulator link -->
+              <div class="aFlex aRow x3 y2 simuLink_btn back-yellow" onclick="window.location.href='simulator.html'">
+                Bacara Simulator
+              </div>
               <!-- Balance -->
               <div class="aFlex aRow balanceSec y2 x3 back-black">
                 <div>0 $ </div>
-                <div class="addBalanceButton aFlex aCol back-green x2 y2"><i class="material-icons" style="font-size:30px">add</i></div>
+                <div class="addBalanceButton aFlex aCol back-green x2 y2" onclick="openModal()"><i class="material-icons" style="font-size:30px">add</i></div>
               </div>
               <!-- P/B Button -->
               <div class="aFlex aRow pbButtonPanel">
@@ -285,6 +357,7 @@
             }
             if(rowCount == 5){rowCount = 1;colCount += 1;}
           }
+          console.log('send: c'+(curCol-1)+'r'+curRow)
           calResult4row(curCol,curRow);
         }
       </script>
@@ -338,8 +411,10 @@
               calCur = curCol + 1;
               nexRow = 1;
             }else{
+              calCur = curCol;
               nexRow = curRow + 1;
             }
+            console.log('>:c'+(calCur-1)+'r'+nexRow)
             document.getElementById("4rowResult").innerHTML = document.getElementById('c'+(calCur-1)+'r'+nexRow).innerHTML;
             fetchXO(curCol,curRow);
           }else{
@@ -685,19 +760,19 @@
 
         function setBalance(value){
           myBalance = value;
-          undoList.append(value);
+          undoList.push(value);
         }
 
         function setWin(value){
           w = value;
           myBalance = myBalance + value;
-          undoList.append(value);
+          undoList.push(value);
         }
 
         function setLose(value){
           l = value;
           myBalance = myBalance - value;
-          undoList.append(value);
+          undoList.push(value);
         }
 
         function unDo(){

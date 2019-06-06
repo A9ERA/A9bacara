@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>B | Simulator</title>
+     <!-- update the version number as needed -->
+     <script defer src="/__/firebase/5.4.0/firebase-app.js"></script>
+     <!-- include only the Firebase features as you need -->
+     <script defer src="/__/firebase/5.4.0/firebase-auth.js"></script>
+     <script defer src="/__/firebase/5.4.0/firebase-database.js"></script>
+     <script defer src="/__/firebase/5.4.0/firebase-messaging.js"></script>
+     <script defer src="/__/firebase/5.4.0/firebase-storage.js"></script>
+     <!-- initialize the SDK after all desired features are loaded -->
+     <script defer src="/__/firebase/init.js"></script>
+     <script src="./js/jquery.min.js"></script>
+     <link rel="stylesheet" href="./css/a9era.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+    .container{
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 100%;
+    }
+    .resultScreen{
+        margin-top: 10%;
+        min-width: 50vw;
+        transition: 0.5s;
+    }
+    .spinner{
+        background-image: url(/public/img/orig.gif);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position-y: -50px;
+        width: 400px;
+        height: 200px;
+    }
+    #resultP{
+        font-size: 90pt;
+        color: #00a0b0;
+    }
+    #resultB{
+        font-size: 90pt;
+        color: #cc2a36;
+    }
+    #startBTN:hover{
+        
+    }
+</style>
+<body style="background-color: black">
+    <!-- middle container -->
+    <div class="aFlex aRow x2 container">
+        <!-- Result Screen 1 -->
+        <div id='init' class="aFlex aCol x1 y1 resultScreen back-black">
+            <!-- spinner -->
+            <div class="aFlex aCol x2 y1" style="width: 100%;">
+                <div class="spinner"></div>
+            </div>
+            <div class="aFlex aCol x1 y1" style="padding-left: 2vw;font-weight: bold;color: rgb(187, 187, 187);">
+                Please input data:
+            </div>
+            <div class="aFlex aCol x1 y1" style="width: 80%;margin-left: 10%;margin-top: 0.5vw;font-weight: bold;color: rgb(187, 187, 187);">
+                <input id='baccData'  type="text" class="aform" style="width: 100%;" onkeypress="return checkBP();">
+            </div>
+            <div class="aFlex aCol x1 y1" style="width: 80%;padding-left: 2vw;margin-top: 0.5vw;font-weight: bold;color: rgb(187, 187, 187);">
+                Please input your balance:
+            </div>
+            <div class="aFlex aCol x1 y1" style="width: 80%;margin-left: 10%;margin-top: 0.5vw;font-weight: bold;color: rgb(187, 187, 187);">
+                <input id='balanceData' type="number" class="aform" style="width: 20%;" value="300">
+            </div>
+
+            <div id="startBTN" onclick="saveData()" onmouseover="startBTNHover();" onmouseout="startBTNUnHover()" class="aFlex aCol x3 y2 back-yellow" style="cursor: pointer;height: 100px;width: 40%;margin-top: 20%;margin-left: 60%">
+                <div id="startBtnInner" style="color: white;font-weight: bold;font-size: 4vw;padding-right: 0%;transition: 0.5s;user-select:none;">
+                    START
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Result Screen 2 -->
+        <div id='playing' class="aFlex aCol x1 y1 resultScreen back-black">
+            <div id='bacResult' style="height: 0px;width: 100%;background-color: rgb(19, 18, 18);transition: 0.5s">
+
+            </div>
+        </div>
+        <!-- Result Screen 2 hide -->
+        <script>
+           $("#playing").hide();
+        </script>
+        <!-- Time countdown & Balance -->
+        <!-- Btn player banker -->
+        <!-- Total Result Score -->
+    </div>
+</body>
+<!-- checkBP -->
+<script>
+    function checkBP(){
+
+      if (event.keyCode == 80 || event.keyCode == 112 || event.keyCode == 66 || event.keyCode == 98 || event.keyCode == 8) 
+        return true;
+      else{
+            return false;
+        }
+    }
+</script>
+<!-- onStartBtnHover -->
+<script>
+    function startBTNHover() {
+        let inner = document.getElementById('startBtnInner');
+        inner.style.paddingRight='20%';
+    }
+    function startBTNUnHover() {
+        let inner = document.getElementById('startBtnInner');
+        inner.style.paddingRight='0%';
+    }
+</script>
+<!-- saveData -->
+<script>
+    var bac = 'pb';
+    var balan = 300;
+    function saveData() {
+        // check input box
+        let c = 0;
+        let baccData = document.getElementById('baccData').value
+        let balanceData = document.getElementById('balanceData').value
+        if (baccData == '') {
+            alert('Please input data')
+        }else{
+            c++;
+        }
+        if (balanceData == '') {
+            alert('Please your balance')
+        }else{
+            c++;
+        }
+
+        // start bacc sim
+
+        if (c == 2) {
+            bac = baccData
+            balan = balanceData
+            $("#init").hide();
+            $("#playing").show();
+            setTimeout(function(){ starting() }, 1000);
+        }
+    } 
+</script>
+<!-- playing -->
+<script>
+    function starting() {
+        $("#playing").css({'min-width':'60vw','margin-top': '0%'})
+        setTimeout(function(){ $("#bacResult").css({'height': '40%'}) }, 500);
+    }
+</script>
+</html>
