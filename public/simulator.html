@@ -37,6 +37,25 @@
         width: 400px;
         height: 200px;
     }
+    .bItem{
+        border-radius: 50%;
+        width: 1.2vw;
+        height: 1.2vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 0.85vw;
+        text-shadow: 2px 1px 3px black;
+        -webkit-user-select:none;
+        -khtml-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+    }
     #resultP{
         font-size: 90pt;
         color: #00a0b0;
@@ -95,34 +114,47 @@
 
         <!-- Result Screen 2 -->
         <div id='playing' class="aFlex aCol x1 y1 resultScreen back-black">
-            <div id='bacResult' style="height: 0px;width: 100%;background-color: rgb(19, 18, 18);transition: 0.5s">
-
+            <!-- result -->
+            <div id='bacResult' class="aFlex aRow" style="height: 0px;width: 100%;background-color: rgb(19, 18, 18);transition: 0.5s">
+                <!-- col1 -->
+                <div id="c_1" class="aFlex aCol back-blue">
+                    <div class="bItem back-red">B</div>
+                    <div class="bItem back-red">B</div>
+                    <div class="bItem back-red">B</div>
+                    <div class="bItem back-red">B</div>
+                </div>
+                <!-- col2 -->
+                <div class="aFlex aCol back-yellow">
+                    <div class="bItem back-blue">P</div>
+                    <div class="bItem back-blue">P</div>
+                </div>
             </div>
+            <!-- console panel -->
             <div id='console' class="aFlex aCol f-1 x2">
-                <!-- correntBalance -->
+                <!-- currentBalance -->
                 <div class="aFlex aRow x3" style="height: 40px;width: 100%;">
                     <!-- Balance -->
                     <div style="width: 150px;height: 100%;border-radius: 0px 0px 0px 15px;background-color: #545454">
-                        <b id="correntBalance" class="aFlex aRow x3 y2" style="height: 100%;font-size: 25pt;color: #26ff8f;padding-right: 5pt;user-select: none;">300</b>
+                        <b id="currentBalance" class="aFlex aRow x3 y2" style="height: 100%;font-size: 25pt;color: #26ff8f;padding-right: 5pt;user-select: none;">300</b>
                     </div>
                     <!-- ฿ -->
                     <div style="width: 40px;height: 100%;background-color: #b3b3b3">
                         <b class="aFlex aRow x3 y2" style="height: 100%;font-size: 25pt;color: #545454;padding-right: 5pt;user-select: none;">฿</b>
                     </div>
                 </div>
-                <!-- correntBet & skipBtn -->
+                <!-- currentBet & skipBtn -->
                 <div class="aFlex aRow y2 spb-M" style="height: 60px;width: 50%;">
                     <!-- player bet -->
                     <div class="aFlex" style="height: 80%;width: 100px;border-style: solid;border-width: 4pt;border-color: #fbff12;border-radius: 15pt;">
-                        <b id="correntBet_P" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
+                        <b id="currentBet_P" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
                     </div>
                     <!-- skip btn -->
-                    <div id='skipBtn' onmouseover="$('#skPic').attr('src','/public/img/skipBtnhover.png')" onmouseout="$('#skPic').attr('src','/public/img/skipBtn.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ffffff;border-radius: 50%;">
+                    <div id='skipBtn' onclick="nextResult()" onmouseover="$('#skPic').attr('src','/public/img/skipBtnhover.png')" onmouseout="$('#skPic').attr('src','/public/img/skipBtn.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ffffff;border-radius: 50%;">
                         <img id='skPic' src="/public/img/skipBtn.png" style="height: 50%;width: 50%;margin-left:10%;transition: 0.3s">            
                     </div>
                     <!-- banker bet -->
                     <div class="aFlex" style="height: 80%;width: 100px;border-style: solid;border-width: 4pt;border-color: #fbff12;border-radius: 15pt;">
-                        <b id="correntBet_B" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
+                        <b id="currentBet_B" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
                     </div>
                 </div>
                 <!-- player & banker BTN -->
@@ -220,11 +252,63 @@
 </script>
 <!-- playing -->
 <script>
+    var prevData = ''
+    var currentPosition = 0
+    var totalData = 0
+    var bacArrData = []
+    var currentCol = 0
+    var currentRow = 0
+
     function starting() {
         $("#playing").css({'min-width':'60vw','margin-top': '0%'})
         setTimeout(function(){ $("#bacResult").css({'height': '40%'}) }, 500);
         setTimeout(function(){ $("#console").show(); }, 1000);
+        initData()
+    }
+    function fetchResult(col,row,val) {
+        alert(col+' '+row+' '+val)
+        if (isLastGame()) {
+            alert('END')
+        }
+    }
+    function nextResult() {
+        currentPosition++
+        let res = ''
+        if(currentPosition<totalData){
+            res = getCurrentResult()
+
+            if (prevData != '') {
+                if(prevData==res){
+                    currentRow++
+                }else{
+                    currentCol++
+                    currentRow = 1
+                }
+            }else{
+                currentCol++
+                currentRow++
+            }
+            prevData = res
+            fetchResult(currentCol,currentRow,res)
+        }else{
+            alert('ERR:The game has been ended.')
+        }
         
+    }
+    function getCurrentResult() {
+        return bacArrData[currentPosition]
+    }
+    function initData() {
+        bacArrData = bac.split("") 
+        totalData = bacArrData.length
+        currentPosition = -1
+    }
+    function isLastGame() {
+        if((currentPosition+1)==totalData){
+            return true
+        }else{
+            return false
+        }
     }
 </script>
 </html>
