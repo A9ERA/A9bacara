@@ -38,6 +38,27 @@
         height: 200px;
     }
     .bItem{
+        background-color: #cc2a36;
+        border-radius: 50%;
+        width: 1.2vw;
+        height: 1.2vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 0.85vw;
+        text-shadow: 2px 1px 3px black;
+        -webkit-user-select:none;
+        -khtml-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+    }
+    .pItem{
+        background-color: #00a0b0;
         border-radius: 50%;
         width: 1.2vw;
         height: 1.2vw;
@@ -68,12 +89,6 @@
         cursor: pointer;
         background-color: white;
         transition: 0.3s;
-    }
-    #pBtn:hover{
-        background-color: #00a0b0;cursor: pointer;
-    }
-    #bBtn:hover{
-        background-color: #cc2a36;cursor: pointer;
     }
     #clearBtn:hover{
         background-color: #ff0011;cursor: pointer;
@@ -117,17 +132,17 @@
             <!-- result -->
             <div id='bacResult' class="aFlex aRow" style="height: 0px;width: 100%;background-color: rgb(19, 18, 18);transition: 0.5s">
                 <!-- col1 -->
-                <div id="c_1" class="aFlex aCol back-blue">
+                <!-- <div id="c_1" class="aFlex aCol">
                     <div class="bItem back-red">B</div>
                     <div class="bItem back-red">B</div>
                     <div class="bItem back-red">B</div>
                     <div class="bItem back-red">B</div>
-                </div>
+                </div> -->
                 <!-- col2 -->
-                <div class="aFlex aCol back-yellow">
+                <!-- <div id="c_2" class="aFlex aCol">
                     <div class="bItem back-blue">P</div>
                     <div class="bItem back-blue">P</div>
-                </div>
+                </div> -->
             </div>
             <!-- console panel -->
             <div id='console' class="aFlex aCol f-1 x2">
@@ -135,7 +150,7 @@
                 <div class="aFlex aRow x3" style="height: 40px;width: 100%;">
                     <!-- Balance -->
                     <div style="width: 150px;height: 100%;border-radius: 0px 0px 0px 15px;background-color: #545454">
-                        <b id="currentBalance" class="aFlex aRow x3 y2" style="height: 100%;font-size: 25pt;color: #26ff8f;padding-right: 5pt;user-select: none;">300</b>
+                        <b id="currentBalance" class="aFlex aRow x3 y2" style="height: 100%;font-size: 25pt;color: #26ff8f;padding-right: 5pt;user-select: none;">0</b>
                     </div>
                     <!-- ฿ -->
                     <div style="width: 40px;height: 100%;background-color: #b3b3b3">
@@ -146,44 +161,44 @@
                 <div class="aFlex aRow y2 spb-M" style="height: 60px;width: 50%;">
                     <!-- player bet -->
                     <div class="aFlex" style="height: 80%;width: 100px;border-style: solid;border-width: 4pt;border-color: #fbff12;border-radius: 15pt;">
-                        <b id="currentBet_P" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
+                        <b id="currentBet_p" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">0</b>
                     </div>
                     <!-- skip btn -->
-                    <div id='skipBtn' onclick="nextResult()" onmouseover="$('#skPic').attr('src','/public/img/skipBtnhover.png')" onmouseout="$('#skPic').attr('src','/public/img/skipBtn.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ffffff;border-radius: 50%;">
+                    <div id='skipBtn' onclick="nextResult('skip')" onmouseover="$('#skPic').attr('src','/public/img/skipBtnhover.png')" onmouseout="$('#skPic').attr('src','/public/img/skipBtn.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ffffff;border-radius: 50%;">
                         <img id='skPic' src="/public/img/skipBtn.png" style="height: 50%;width: 50%;margin-left:10%;transition: 0.3s">            
                     </div>
                     <!-- banker bet -->
                     <div class="aFlex" style="height: 80%;width: 100px;border-style: solid;border-width: 4pt;border-color: #fbff12;border-radius: 15pt;">
-                        <b id="currentBet_B" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">50</b>
+                        <b id="currentBet_b" class="aFlex aRow x2 y2" style="width: 100%;height: 100%;font-size: 25pt;color: #fbff12;user-select: none;">0</b>
                     </div>
                 </div>
                 <!-- player & banker BTN -->
                 <div class="aFlex aRow y2 spb-M" style="height: 150px;width: 50%;margin-top: 10px;">
-                    <div id='pBtn' onmouseover="$('#pIN').css({'color':'#ffffff'})" onmouseout="$('#pIN').css({'color':'#00a0b0'})" class="aFlex" style="transition: 0.3s;height: 100%;width: 45%;border-style: solid;border-width: 5pt;border-color: #00a0b0;border-radius: 15pt;">
+                    <div id='pBtn' class="aFlex" style="transition: 0.3s;height: 100%;width: 45%;border-style: solid;border-width: 5pt;border-color: #00a0b0;border-radius: 15pt;">
                         <b id='pIN' class="aFlex aRow x2 y2" style="transition: 0.3s;width: 100%;height: 100%;font-size: 90pt;color: #00a0b0;user-select: none;">P</b>
                     </div>
-                    <div id='bBtn' onmouseover="$('#bIN').css({'color':'#ffffff'})" onmouseout="$('#bIN').css({'color':'#cc2a36'})" class="aFlex" style="transition: 0.3s;height: 100%;width: 45%;border-style: solid;border-width: 5pt;border-color: #cc2a36;border-radius: 15pt;">
+                    <div id='bBtn' class="aFlex" style="transition: 0.3s;height: 100%;width: 45%;border-style: solid;border-width: 5pt;border-color: #cc2a36;border-radius: 15pt;">
                         <b id='bIN' class="aFlex aRow x2 y2" style="transition: 0.3s;width: 100%;height: 100%;font-size: 90pt;color: #cc2a36;user-select: none;">B</b>
                     </div>
                 </div>
                 <!-- clear & confirm BTN -->
                 <div class="aFlex aRow y2 spa-M" style="height: 60px;width: 15%;margin-top: 30px;">
                     <!-- clear btn -->
-                    <div id='clearBtn' onmouseover="$('#clearPic').attr('src','/public/img/clearhover.png')" onmouseout="$('#clearPic').attr('src','/public/img/clear.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ff0015;border-radius: 50%;">
+                    <div id='clearBtn' onclick="clearBet()" onmouseover="$('#clearPic').attr('src','/public/img/clearhover.png')" onmouseout="$('#clearPic').attr('src','/public/img/clear.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #ff0015;border-radius: 50%;">
                         <img id='clearPic' src="/public/img/clear.png" style="height: 50%;width: 50%;transition: 0.3s">            
                     </div>
                     <!-- confirm btn -->
-                    <div id='confirmBtn' onmouseover="$('#confirmPic').attr('src','/public/img/confirmhover.png')" onmouseout="$('#confirmPic').attr('src','/public/img/confirm.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #3cff00;border-radius: 50%;">
+                    <div id='confirmBtn' onclick="confirmBtn()" onmouseover="$('#confirmPic').attr('src','/public/img/confirmhover.png')" onmouseout="$('#confirmPic').attr('src','/public/img/confirm.png')" class="aFlex aCol x2 y2" style="height: 100%;width: 60px;border-style: solid;border-width: 4pt;border-color: #3cff00;border-radius: 50%;">
                         <img id='confirmPic' src="/public/img/confirm.png" style="height: 60%;width: 60%;transition: 0.3s">            
                     </div>
                 </div>
                 <!-- chip -->
                 <div class="aFlex aRow y2 spb-M" style="height: 60px;width: 30%;margin-top: 50px;">
-                    <img src="/public/img/25Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
-                    <img src="/public/img/100Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
-                    <img src="/public/img/500Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
-                    <img src="/public/img/1000Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
-                    <img src="/public/img/5000Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
+                    <img onclick="invest(25)" src="/public/img/25Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
+                    <img onclick="invest(100)" src="/public/img/100Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
+                    <img onclick="invest(500)" src="/public/img/500Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
+                    <img onclick="invest(1000)" src="/public/img/1000Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
+                    <img onclick="invest(5000)" src="/public/img/5000Chip.png" style="cursor: pointer;height: 60px;width: 60px;">            
                 </div>
             </div>
         </div>
@@ -258,6 +273,8 @@
     var bacArrData = []
     var currentCol = 0
     var currentRow = 0
+    var currentBet = ''
+    var currentMo = 0
 
     function starting() {
         $("#playing").css({'min-width':'60vw','margin-top': '0%'})
@@ -266,12 +283,15 @@
         initData()
     }
     function fetchResult(col,row,val) {
-        alert(col+' '+row+' '+val)
+        document.getElementById('c_'+currentCol).innerHTML += '<div class="'+val.toLowerCase()+'Item">'+val.toUpperCase()+'</div>'
         if (isLastGame()) {
             alert('END')
         }
     }
-    function nextResult() {
+    function newColumn(){
+        document.getElementById('bacResult').innerHTML += '<div id="c_'+currentCol+'" class="aFlex aCol">'
+    }
+    function nextResult(type) {
         currentPosition++
         let res = ''
         if(currentPosition<totalData){
@@ -282,10 +302,12 @@
                     currentRow++
                 }else{
                     currentCol++
+                    newColumn()
                     currentRow = 1
                 }
             }else{
                 currentCol++
+                newColumn()
                 currentRow++
             }
             prevData = res
@@ -293,15 +315,118 @@
         }else{
             alert('ERR:The game has been ended.')
         }
+        if (type == 'confirm') {
+            calBet()
+        }
         
     }
     function getCurrentResult() {
         return bacArrData[currentPosition]
     }
+    function bet(val) {
+        currentBet = val
+        $('#skipBtn').hide()
+        if(val=='p'){
+            $('#'+val+'Btn').css({'background-color':'#00a0b0'})
+            $('#'+val+'Btn').unbind('mouseout');
+            blockBtn('b')
+        }else{
+            $('#'+val+'Btn').css({'background-color':'#cc2b36'})
+            $('#'+val+'Btn').unbind('mouseout');
+            blockBtn('p')
+        }
+        $('#'+val+'Btn').mouseout(function () {
+            $('#'+val+'IN').css({'color':'#ffffff'})
+        })
+    }
+    function blockBtn(val) {
+        $('#'+val+'Btn').unbind('click');
+        $('#'+val+'Btn').unbind('mouseover');
+        $('#'+val+'Btn').unbind('mouseout');
+        $('#'+val+'Btn').css({'cursor':'unset'})
+    }
+    function setBtnEvent() {
+        $('#pBtn').css({'background-color':'unset'})
+        $('#bBtn').css({'background-color':'unset'})
+        $('#pIN').css({'color':'#00a0b0'})
+        $('#bIN').css({'color':'#cc2b36'})
+        $('#pBtn').css({'cursor':'pointer'})
+        $('#bBtn').css({'cursor':'pointer'})
+
+        $('#pBtn').click(function () {
+            bet('p')
+        })
+        $('#bBtn').click(function () {
+            bet('b')
+        })
+        $('#pBtn').mouseover(function () {
+            $('#pBtn').css({'background-color':'#00a0b0'})
+            $('#pIN').css({'color':'#ffffff'})
+        })
+        $('#bBtn').mouseover(function () {
+            $('#bBtn').css({'background-color':'#cc2b36'})
+            $('#bIN').css({'color':'#ffffff'})
+        })
+        $('#pBtn').mouseout(function () {
+            $('#pBtn').css({'background-color':'unset'})
+            $('#pIN').css({'color':'#00a0b0'})
+        })
+        $('#bBtn').mouseout(function () {
+            $('#bBtn').css({'background-color':'unset'})
+            $('#bIN').css({'color':'#cc2a36'})
+        })
+    }
+    function invest(mo){
+        if (currentBet != '') {
+            if (balan >= mo) {
+                balan -= mo
+                currentMo += mo
+                setCurrentBlance()
+                showCurrentBet()
+            }else{
+                alert('Your balance is not enough!')
+            }
+        } else {
+            alert('Please select player or banker')   
+        }
+    }
+    function showCurrentBet() {
+       $('#currentBet_'+currentBet).html(currentMo)
+    }
+    function calBet() {
+        if(prevData == currentBet){
+            balan += currentMo*2
+        }
+        currentMo = 0
+        currentBet = ''
+        $('#currentBet_p').html(currentMo)
+        $('#currentBet_b').html(currentMo)
+        $('#skipBtn').show()
+        setCurrentBlance()
+        setBtnEvent()
+    }
+    function confirmBtn() {
+        nextResult('confirm')
+    }
+    function clearBet(){
+        currentBet = ''
+        balan = parseInt(balan) + parseInt(currentMo) 
+        currentMo = 0
+        $('#currentBet_p').html(currentMo)
+        $('#currentBet_b').html(currentMo)
+        setCurrentBlance()
+        setBtnEvent()
+        $('#skipBtn').show()
+    }
     function initData() {
         bacArrData = bac.split("") 
         totalData = bacArrData.length
         currentPosition = -1
+        setCurrentBlance()
+        setBtnEvent()
+    }
+    function setCurrentBlance() {
+        $('#currentBalance').html(balan)
     }
     function isLastGame() {
         if((currentPosition+1)==totalData){
